@@ -9,11 +9,11 @@ templ Page(docTitle string, docBody string, currentDocPath string) {
 			<aside class="hidden md:block w-56 flex-shrink-0 border-r-2 border-[var(--border)] pr-8">
 				<p class="mb-4 text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--fg-muted)]">Documentation</p>
 				<nav class="space-y-2">
-					@docNavLink("/docs/getting-started", currentDocPath, "The Incantation")
-					@docNavLink("/docs/routing", currentDocPath, "Paths & Sigils")
-					@docNavLink("/docs/components", currentDocPath, "Runes of Rendering")
+					@docNavLink("/docs/getting-started", currentDocPath, "Getting Started")
+					@docNavLink("/docs/routing", currentDocPath, "Routing")
+					@docNavLink("/docs/components", currentDocPath, "Components")
 					@docNavLink("/docs/oob-swaps", currentDocPath, "OOB Swaps")
-					@docNavLink("/docs/deployment", currentDocPath, "Summoning & Embeds")
+					@docNavLink("/docs/deployment", currentDocPath, "Deployment")
 					@docNavLink("/docs/void", currentDocPath, "The Void")
 				</nav>
 			</aside>

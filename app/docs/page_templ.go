@@ -47,15 +47,15 @@ func Page(docTitle string, docBody string, currentDocPath string) templ.Componen
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = docNavLink("/docs/getting-started", currentDocPath, "The Incantation").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = docNavLink("/docs/getting-started", currentDocPath, "Getting Started").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = docNavLink("/docs/routing", currentDocPath, "Paths & Sigils").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = docNavLink("/docs/routing", currentDocPath, "Routing").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = docNavLink("/docs/components", currentDocPath, "Runes of Rendering").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = docNavLink("/docs/components", currentDocPath, "Components").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -63,7 +63,7 @@ func Page(docTitle string, docBody string, currentDocPath string) templ.Componen
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = docNavLink("/docs/deployment", currentDocPath, "Summoning & Embeds").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = docNavLink("/docs/deployment", currentDocPath, "Deployment").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
