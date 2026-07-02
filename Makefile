@@ -46,17 +46,12 @@ $(TAILWIND_BIN):
 	curl -L --progress-bar -o $(TAILWIND_BIN) $(TAILWIND_URL)
 	chmod +x $(TAILWIND_BIN)
 
-## sync: Copy colocated files to compiler directory gotth_build/
-sync:
-	@mkdir -p gotth_build
-	@rsync -a --delete --exclude='gotth_build' --exclude='bin' --exclude='tmp' --exclude='.git' ./ gotth_build/
-
 TEMPL_BIN := $(shell which templ 2>/dev/null || echo "$(shell go env GOPATH)/bin/templ")
 
-## templ: Generate Go files inside the compiler directory
-templ: sync
+## templ: Generate Go files in-place
+templ:
 	@which templ > /dev/null || (echo "Installing templ..." && go install github.com/a-h/templ/cmd/templ@latest)
-	@cd gotth_build && $(TEMPL_BIN) generate
+	@$(TEMPL_BIN) generate
 
 ## css: Compile Tailwind CSS (scans root source templ files)
 css:
@@ -65,8 +60,8 @@ css:
 ## dev: Run live-reloading dev server
 dev: $(TAILWIND_BIN)
 	@$(MAKE) css
-	@bash -c 'trap "kill 0" EXIT; $(TAILWIND_BIN) -i app/globals.css -o app/globals.css.output --watch & air; wait'
+	@bash -c 'trap "kill 0" EXIT; $(TAILWIND_BIN) -i app/globals.css -o app/assets/globals.css.output --watch & air; wait'
 
 ## build: Compile production server binary and assets
 build: css templ
-	@cd gotth_build && go build -o ../$(APP_BIN) main.go
+	go build -o $(APP_BIN) main.go

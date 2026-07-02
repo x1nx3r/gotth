@@ -1,12 +1,6 @@
 # Build artifacts
 /bin/
 /tmp/
-/gotth_build/
-
-# Generated files (only in build directory, but ignore locally just in case)
-*_templ.go
-app/globals.css.output
-app/assets/globals.css.output
 
 # IDE
 .idea/

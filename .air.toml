@@ -3,10 +3,10 @@ tmp_dir = "tmp"
 
 [build]
   bin = "./bin/server"
-  cmd = "make sync && cd gotth_build && templ generate && go vet ./... && go build -o ../bin/server main.go"
+  cmd = "make templ && go build -o ./bin/server main.go"
   delay = 300
-  exclude_dir = ["bin", "tmp", "public", ".git", "gotth_build"]
-  exclude_regex = ["_test\\.go$"]
+  exclude_dir = ["bin", "tmp", "public", ".git"]
+  exclude_regex = ["_test\\.go$", ".*_templ\\.go$"]
   include_ext = ["go", "templ", "output"]
   kill_delay = "0s"
   send_interrupt = false
