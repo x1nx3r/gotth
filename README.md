@@ -1,4 +1,8 @@
-# GOTTH Stack Boilerplate
+<p align="center">
+  <img src="public/goth_lady_logo.jpg" width="120" height="120" alt="GOTTH Logo" style="border: 2px solid #1a1a24;" />
+</p>
+
+<h1 align="center">GOTTH Stack Boilerplate</h1>
 
 This is a [Go](https://golang.org/), [Templ](https://templ.guide/), [Tailwind CSS v4](https://tailwindcss.com/), and [HTMX](https://htmx.org/) project bootstrapped with zero `node_modules` and zero respect for the modern JavaScript build tax.
 
