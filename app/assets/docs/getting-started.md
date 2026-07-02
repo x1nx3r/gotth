@@ -8,6 +8,18 @@ The core ingredients of the stack are:
 - `Tailwind CSS v4` — Standalone styling compiler
 - `HTMX 2` — Declarative server interactivity
 
+## Cloning the Grimoire
+
+To summon the boilerplate onto your local machine, clone the repository and navigate into the project directory:
+
+```bash
+git clone https://github.com/x1nx3r/gotth.git
+cd gotth
+make setup
+```
+
+This downloads the standalone Tailwind v4 compiler executable, tidies Go modules, compiles initial Templ files, and gets your environment ready.
+
 ## Summoning the Dev Server
 
 To launch the local developer environment, run:

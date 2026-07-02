@@ -4,6 +4,10 @@
 
 <h1 align="center">GOTTH Stack Boilerplate</h1>
 
+<p align="center">
+  <strong>Live Sanctuary: <a href="https://gotth.x1nx3r.dev" target="_blank">gotth.x1nx3r.dev</a></strong>
+</p>
+
 This is a [Go](https://golang.org/), [Templ](https://templ.guide/), [Tailwind CSS v4](https://tailwindcss.com/), and [HTMX](https://htmx.org/) project bootstrapped with zero `node_modules` and zero respect for the modern JavaScript build tax.
 
 We call it the **GOTTH** stack because it stands for Go, Templ, Tailwind, and HTMX, and because Next.js is a beautiful, bloated lie.
