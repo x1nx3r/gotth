@@ -30,9 +30,9 @@ The proxy server running on port `3000` intercepts your HTML responses and injec
 
 Every technical design choice in the GOTTH stack was forged in the fires of operational PTSD. Below is the documentation of our choices and the trauma that inspired them.
 
-### 1. The `gotth_build` Directory Sync Pattern
-* **The Trauma**: Standard template watchers in Go (like `templ generate --watch`) recursively scan files. However, by Go convention, configuration sweeps and CLI walks ignore directories starting with a dot (like `.gotth` or `.build`). When we compiled inside dot-folders, our changes were silently ignored, causing developers to pull their hair out wondering why their HTML updates weren't showing up.
-* **The Solution**: We created a dedicated, visible `gotth_build/` folder. The `Makefile` uses `rsync -a --delete` to cleanly copy the root workspace to `gotth_build/` on every change, excluding build targets, temporary files, and git history. Templ compiles inside this directory, and Go builds the final binary from it. This isolates the generator's output, prevents build directory pollution, and keeps the root clean.
+### 1. In-Place Compilation & Watcher Loop Prevention
+* **The Trauma**: Infinite hot-reload rebuild loops. When `templ generate` runs, it outputs `_templ.go` files. If a file watcher is set to monitor all `.go` files, compiling a template modifies a Go file, which triggers the watcher, which then triggers another compilation loop—maxing out the CPU. To bypass this, developers often use convoluted directory syncing (copying files to separate build folders), which breaks serverless hosting (like Vercel) because their Go compiler only compiles at the root of the repository.
+* **The Solution**: We compile templates directly in-place at the root. We prevent the infinite watcher loop by adding a regex pattern to `.air.toml` (`exclude_regex = ["_test\\.go$", ".*_templ\\.go$"]`). Because files are generated in-place, the project remains a standard Go module, allowing zero-configuration cloud builds.
 
 ### 2. In-Memory Assets & Docs (Go `//go:embed`)
 * **The Trauma**: You deploy a Go binary to a VPS or Vercel. You configure the server, launch it, and test it. Everything works—until you hit `/docs/getting-started` or load the CSS stylesheet, and the server crashes with a `panic: open docs/getting-started.md: no such file or directory` because the relative directory structure in the container was mapped differently.

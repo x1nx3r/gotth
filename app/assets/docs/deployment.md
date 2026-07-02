@@ -14,7 +14,7 @@ Because these assets are loaded directly from memory, the binary has zero file-s
 
 Vercel natively supports zero-configuration Go deployments. To deploy:
 
-1. Connect your Git repository to the Vercel dashboard.
-2. Vercel automatically detects the root `main.go` and `go.mod` file.
-3. During build compilation, Go embeds the assets virtual directory into the binary.
-4. Scale-to-zero serverless handlers serve your pages immediately.
+1. Run `make build` locally to generate your `*_templ.go` templates and compiled `app/assets/globals.css.output` stylesheet.
+2. Commit all generated files to Git and push them.
+3. Connect your Git repository to the Vercel dashboard (leave the "Build Command" blank).
+4. Vercel automatically detects the root `main.go` and Go compiler version, compiles the self-contained binary in 1 second, and deploys it immediately.
