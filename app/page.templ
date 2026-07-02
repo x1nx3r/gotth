@@ -1,0 +1,97 @@
+package app
+
+import (
+	"gotth/app/components"
+)
+
+templ Page(initialQuoteText string, initialQuoteAuthor string) {
+	@Layout("GOTTH Stack — The Anti-Next.js Boilerplate", "/") {
+		<!-- Hero -->
+		<section class="bg-[var(--bg)] px-6 py-28 lg:px-8 border-b-2 border-[var(--border)]">
+			<div class="mx-auto max-w-3xl text-center">
+				<!-- Badge -->
+				<h1 class="text-6xl font-black uppercase tracking-tighter text-[var(--fg)] sm:text-8xl leading-none">
+					Next.js is a
+					<br/>
+					beautiful lie.
+				</h1>
+				<p class="mx-auto mt-8 max-w-xl text-sm font-bold text-[var(--fg-muted)] leading-relaxed uppercase tracking-wide">
+					Ditch the 350 MB <code class="bg-[var(--bg-subtle)] border border-[var(--border)] px-1.5 py-0.5 text-xs font-mono text-[var(--fg)]">node_modules</code> black hole.
+					Build fast, multi-page apps with Go, Templ, Tailwind, and HTMX.
+				</p>
+				<!-- CTAs -->
+				<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+					<a
+						href="/docs"
+						class="inline-flex h-10 items-center border-2 border-[var(--border)] bg-[var(--fg)] px-6 text-xs font-bold uppercase tracking-wider text-[var(--bg)] transition-all hover:bg-[var(--bg-subtle)] hover:text-[var(--fg)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none shadow-[4px_4px_0px_0px_var(--border)]"
+					>
+						Read the docs
+					</a>
+				</div>
+				<!-- Stack badges -->
+				<div class="mt-16 flex items-center justify-center gap-2.5 flex-wrap">
+					@stackBadge("Go 1.22")
+					@stackBadge("Templ")
+					@stackBadge("Tailwind v4")
+					@stackBadge("HTMX 2")
+					@stackBadge("0 KB JS")
+				</div>
+			</div>
+		</section>
+		<!-- Metrics Chart -->
+		<section class="border-b-2 border-[var(--border)] bg-[var(--bg-subtle)] px-6 py-24 lg:px-8">
+			<div class="mx-auto max-w-4xl">
+				<div class="mb-12 text-center">
+					<p class="text-xs font-mono font-bold uppercase tracking-widest text-[var(--fg-muted)]">Performance</p>
+					<h2 class="mt-2 text-4xl font-black text-[var(--fg)] tracking-tight">The numbers speak</h2>
+					<p class="mt-3 text-xs font-bold text-[var(--fg-muted)] uppercase tracking-wider">Real measurements. Identical feature sets. Zero bloat.</p>
+				</div>
+				@components.Chart("bundle")
+			</div>
+		</section>
+		<!-- Feature Cards -->
+		<section class="border-b-2 border-[var(--border)] bg-[var(--bg)] px-6 py-24 lg:px-8">
+			<div class="mx-auto max-w-5xl">
+				<div class="mb-16 text-center">
+					<p class="text-xs font-mono font-bold uppercase tracking-widest text-[var(--fg-muted)]">Why GOTTH</p>
+					<h2 class="mt-2 text-4xl font-black text-[var(--fg)] tracking-tight">Zero-compromise stack</h2>
+				</div>
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+					@featureCard("⚡", "Instant builds", "Go compiles the entire binary in milliseconds. No Webpack, no Vite, no bundler needed.")
+					@featureCard("◎", "Zero client bundle", "HTMX drives interactivity. No React runtime, no virtual DOM, no hydration costs.")
+					@featureCard("▲", "Single binary deploy", "One self-contained binary. SCP it to any VPS, set the PORT, and you are done.")
+					@featureCard("↺", "Server Components", "Every component renders on the server. Templ files are type-safe Go functions.")
+					@featureCard("◈", "Native routing", "Go 1.22 pattern matching in stdlib http.ServeMux. No framework overhead, just handlers.")
+					@featureCard("◻", "Tailwind v4", "Standalone CSS binary. No PostCSS config, no Node dependency, runs anywhere.")
+				</div>
+			</div>
+		</section>
+		<!-- Wisdom Engine -->
+		<section class="border-b-2 border-[var(--border)] bg-[var(--bg-subtle)] px-6 py-24 lg:px-8">
+			<div class="mx-auto max-w-3xl">
+				<div class="mb-12 text-center">
+					<p class="text-xs font-mono font-bold uppercase tracking-widest text-[var(--fg-muted)]">Live demo</p>
+					<h2 class="mt-2 text-4xl font-black text-[var(--fg)] tracking-tight">Server-side polling</h2>
+					<p class="mt-3 text-xs font-bold text-[var(--fg-muted)] uppercase tracking-wider">This component automatically polls the server every 10 seconds to fetch a random piece of developer wisdom.</p>
+				</div>
+				@components.WisdomQuote(initialQuoteText, initialQuoteAuthor)
+			</div>
+		</section>
+	}
+}
+
+templ stackBadge(label string) {
+	<span class="border-2 border-[var(--border)] bg-[var(--bg)] px-3 py-1 text-xs font-mono font-bold uppercase text-[var(--fg)] shadow-[2px_2px_0px_0px_var(--border)] select-none">
+		{ label }
+	</span>
+}
+
+templ featureCard(icon string, title string, desc string) {
+	<div class="group rounded-none border-2 border-[var(--border)] bg-[var(--bg)] p-6 shadow-[4px_4px_0px_0px_var(--border)] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_var(--border)]">
+		<div class="mb-4 flex h-9 w-9 items-center justify-center border-2 border-[var(--border)] bg-[var(--bg-subtle)] text-sm font-bold text-[var(--fg-muted)] group-hover:text-[var(--accent)] group-hover:bg-[var(--bg)] transition-colors">
+			{ icon }
+		</div>
+		<h3 class="text-sm font-extrabold text-[var(--fg)] tracking-tight uppercase">{ title }</h3>
+		<p class="mt-2 text-xs text-[var(--fg-muted)] leading-relaxed">{ desc }</p>
+	</div>
+}
