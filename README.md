@@ -20,9 +20,9 @@ make dev
 
 *(Note: `package.json` exists solely as a compatibility proxy so your developer muscle memory doesn't trigger a panic attack when you can't run `npm run dev`. It routes commands to a clean Linux Makefile, preventing you from downloading a 400MB headless Chrome binary just to watch a single text string hot-reload).*
 
-Open [http://localhost:3001](http://localhost:3001) with your browser to see the result. 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. 
 
-The proxy server running on port `3001` intercepts your HTML responses and injects a low-overhead WebSocket reload script. The actual Go application executes natively on port `3000`.
+The proxy server running on port `3000` intercepts your HTML responses and injects a low-overhead WebSocket reload script. The actual Go application executes natively on port `3001`.
 
 ---
 
@@ -77,6 +77,6 @@ Because Vercel supports native Go runtimes, you can connect this repository to y
 ## Learn More
 
 To learn how to escape the Node dependency trap:
-- [GOTTH Documentation](http://localhost:3001/docs) — read the grimoire, run the commands, learn the runes.
+- [GOTTH Documentation](http://localhost:3000/docs) — read the grimoire, run the commands, learn the runes.
 - [HTMX Documentation](https://htmx.org/docs/) — understand how to build single-page app interactivity without loading a 100KB React runtime.
 - [Templ Guide](https://templ.guide/) — type-safe markup compiler for Go.

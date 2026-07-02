@@ -40,7 +40,7 @@ func main() {
 	mux.HandleFunc("GET /docs", docs.PageHandler)
 	mux.HandleFunc("GET /docs/{slug}", docs.PageHandler)
 
-	port := ":3000"
-	fmt.Printf("Server Component Factory™ running at http://localhost%s\n", port)
+	port := ":3001"
+	fmt.Printf("Server Component Factory™ running internally at http://localhost%s\n", port)
 	log.Fatal(http.ListenAndServe(port, mux))
 }
