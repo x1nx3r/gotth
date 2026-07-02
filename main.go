@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 	"gotth/app"
 	"gotth/app/assets"
 	"gotth/app/docs"
@@ -15,17 +15,25 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
+	// Setup virtual filesystem for embedded public assets
+	publicFS, err := fs.Sub(assets.Public, "public")
+	if err != nil {
+		log.Fatal(err)
+	}
+	fileServer := http.FileServer(http.FS(publicFS))
+
 	// Serve built tailwind css output directly from memory
 	mux.Handle("GET /globals.css", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/css")
 		w.Write(assets.CSS)
 	}))
 
-	// Serve public assets automatically from public/ folder at root /
+	// Serve public assets automatically from memory
 	mux.HandleFunc("GET /{file}", func(w http.ResponseWriter, r *http.Request) {
-		filePath := filepath.Join("public", r.PathValue("file"))
-		if info, err := os.Stat(filePath); err == nil && !info.IsDir() {
-			http.ServeFile(w, r, filePath)
+		fileName := r.PathValue("file")
+		if file, err := publicFS.Open(fileName); err == nil {
+			file.Close()
+			fileServer.ServeHTTP(w, r)
 			return
 		}
 		http.NotFound(w, r)
