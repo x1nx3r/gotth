@@ -57,12 +57,12 @@ templ Page(initialQuoteText string, initialQuoteAuthor string) {
 					<h2 class="mt-2 text-4xl font-black text-[var(--fg)] tracking-tight">Zero-compromise stack</h2>
 				</div>
 				<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-					@featureCard("⚡", "Instant builds", "Go compiles the entire binary in milliseconds. No Webpack, no Vite, no bundler needed.")
-					@featureCard("◎", "Zero client bundle", "HTMX drives interactivity. No React runtime, no virtual DOM, no hydration costs.")
-					@featureCard("▲", "Single binary deploy", "One self-contained binary. SCP it to any VPS, set the PORT, and you are done.")
-					@featureCard("↺", "Server Components", "Every component renders on the server. Templ files are type-safe Go functions.")
-					@featureCard("◈", "Native routing", "Go 1.22 pattern matching in stdlib http.ServeMux. No framework overhead, just handlers.")
-					@featureCard("◻", "Tailwind v4", "Standalone CSS binary. No PostCSS config, no Node dependency, runs anywhere.")
+					@featureCard(iconLightning, "Instant builds", "Go compiles the entire binary in milliseconds. No Webpack, no Vite, no bundler needed.")
+					@featureCard(iconZero, "Zero client bundle", "HTMX drives interactivity. No React runtime, no virtual DOM, no hydration costs.")
+					@featureCard(iconBinary, "Single binary deploy", "One self-contained binary. SCP it to any VPS, set the PORT, and you are done.")
+					@featureCard(iconServer, "Server Components", "Every component renders on the server. Templ files are type-safe Go functions.")
+					@featureCard(iconRoute, "Native routing", "Go 1.22 pattern matching in stdlib http.ServeMux. No framework overhead, just handlers.")
+					@featureCard(iconCSS, "Tailwind v4", "Standalone CSS binary. No PostCSS config, no Node dependency, runs anywhere.")
 				</div>
 			</div>
 		</section>
@@ -89,9 +89,21 @@ templ stackBadge(label string) {
 templ featureCard(icon string, title string, desc string) {
 	<div class="group rounded-none border-2 border-[var(--border)] bg-[var(--bg)] p-6 shadow-[4px_4px_0px_0px_var(--border)] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_var(--border)]">
 		<div class="mb-4 flex h-9 w-9 items-center justify-center border-2 border-[var(--border)] bg-[var(--bg-subtle)] text-sm font-bold text-[var(--fg-muted)] group-hover:text-[var(--accent)] group-hover:bg-[var(--bg)] transition-colors">
-			{ icon }
+			@templ.Raw(icon)
 		</div>
 		<h3 class="text-sm font-extrabold text-[var(--fg)] tracking-tight uppercase">{ title }</h3>
 		<p class="mt-2 text-xs text-[var(--fg-muted)] leading-relaxed">{ desc }</p>
 	</div>
 }
+
+const iconLightning = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+
+const iconZero = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`
+
+const iconBinary = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`
+
+const iconServer = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`
+
+const iconRoute = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`
+
+const iconCSS = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>`
