@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/goth_lady_logo.jpg" width="120" height="120" alt="GOTTH Logo" style="border: 2px solid #1a1a24;" />
+  <img src="app/assets/public/goth_lady_logo.jpg" width="120" height="120" alt="GOTTH Logo" style="border: 2px solid #1a1a24;" />
 </p>
 
 <h1 align="center">GOTTH Stack Boilerplate</h1>
