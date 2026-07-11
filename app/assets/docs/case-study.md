@@ -187,6 +187,10 @@ Everything under `app/` follows the same patterns as the boilerplate. More files
 
 **SCENE_DELTA was a mistake.** We built a delta protocol to save bandwidth. It caused phantom diffs and race conditions. Deleted it. Full SCENE_UPDATE works fine because the lazy socket means 99% of users never open one.
 
+**Browser extensions request weird URLs.** React DevTools tried to download `installHook.js.map` from your server. The catch-all route parsed it as a drawing ID and queried SQLite. `sql: no rows in result set` — logged, harmless, confusing. Worth knowing if you see random 404s with drawing-like IDs in your logs.
+
+**`MaxOpenConns(1)` plus a leaked connection freezes everything.** SQLite gets exactly one connection. If you use `db.Query()` without `defer rows.Close()`, the connection never returns to the pool. Every subsequent request blocks forever waiting for a free slot. The server is alive, the goroutines are patiently queued, and all POST requests just hang. Same thing happens if `db.Begin()` returns early on error without `tx.Rollback()`. The fix: always `defer rows.Close()`, always `defer tx.Rollback()` before the error check.
+
 ## Deployment
 
 ```bash
